@@ -1,0 +1,35 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+button, ul {
+  width: 300px;
+  position: fixed;
+  top: 400px;
+}
+
+.col-md-12 {
+  position: fixed;
+  top: 100px;
+  left: 50px;
+}
+
+.col-md-12 h1 {
+  font-family: 'Abril Fatface', cursive;
+  font-size: 50px;
+  color: white;
+}
+
+.col-md-12 h2 {
+  font-family: 'Abril Fatface', cursive;
+  font-size: 40px;
+  color: white;
+  font-style: italic;
+}
+
+body{
+  background-image: url('../images/food_1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
