@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .container
+      // Restaurant details
+      .row
+        .col-md-2.col-md-offset-5
+          h3#restaurantname !{restaurant.name}
+          img#cheekbyjowl(src=restaurant.image)
+          h3#rating
+          h6#restaurantaddress1 !{restaurant.address_line1}
+          h6#restaurantaddress2 !{restaurant.address_line2}
+          h6#restaurantcontact !{restaurant.contact}
+          
