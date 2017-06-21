@@ -5,15 +5,17 @@ const router = express.Router();
 
 // Call functions here
 
-/* GET index page. */
+// GET restaurants page.
 router.get('/', restaurantController.getAll);
+
+// Get restaurant according to ID
 router.get('/:id', restaurantController.getOne);
 
-// Post reviews
-router.post('/postReview', reviewController.createReview);
-
-// Get reviews from database
+// Pushing review to database
 router.get('/createReview', reviewController.createReview);
+
+// List review on frontend
+router.get('/listReview', reviewController.listReview);
 
 // Update restaurant
 

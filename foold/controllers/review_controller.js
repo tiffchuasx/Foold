@@ -29,6 +29,17 @@ exports.createReview = (req, res, next) => {
   });
 };
 
+// Fetch review from backend
+exports.listReview = (req, res, next) => {
+  Review.find({}, (err, review) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(review);
+    res.json(review);
+  });
+};
+
 // Delete review (cruD)
 // exports.postDeleteReview = (req, res, next) => {
 //   Review.remove( { _id: req.review.id }, (err) => {

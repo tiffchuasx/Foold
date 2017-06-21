@@ -2,4 +2,10 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  //- on change is a html listener
+  select(onchange="location = this.value;")
+    for restaurant in list
+      li
+        option(value='http://localhost:3000/restaurants/'+restaurant.id)=restaurant.name
+    //- each restaurant in restaurants
+    //-   option(value=restaurant.id)= variable.var_name

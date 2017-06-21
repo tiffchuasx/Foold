@@ -7,7 +7,7 @@ const Restaurant = require('../models/restaurants');
 exports.getAll = (req, res) => {
 
   Restaurant.find({}, (err, restaurant) => {
-    if (err) res.json({ message: 'Could not find restaurant' });
+    if (err) return res.json({ message: 'Could not find restaurant' });
     res.json(restaurant);
   });
 };
@@ -21,6 +21,9 @@ exports.getOne = (req, res) => {
     if (err) res.json({ message: `Could not find restaurant b/c: ${err}` });
     // If database is empty, will return restaurant1.
   // 'Restaurants' is the pug page we want to navigate to
-    res.render('restaurants', { restaurant: restaurant });
+    res.render('restaurants', {
+      restaurant: restaurant,
+      title: 'Foold |' + ' ' + restaurant.name + ' Reviews'
+     });
   });
 };

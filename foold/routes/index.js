@@ -1,5 +1,6 @@
 import express from 'express';
 
+const Restaurant = require('../models/restaurants');
 const router = express.Router();
 
 // login, signup, all the main things are here
@@ -7,8 +8,12 @@ const router = express.Router();
 /* GET index page. */
 router.get('/', (req, res, next) => {
   // render the index.pug page
-  res.render('index', {
-    title: 'Express'
+  Restaurant.find((err, restaurants) => {
+    if (err) return res.json({ message: `Could not find restaurant b/c: ${err}` });
+    res.render('index', {
+      list: restaurants,
+      title: 'Foold'
+    });
   });
 });
 
