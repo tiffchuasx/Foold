@@ -1,4 +1,7 @@
 const Review = require('../models/reviews');
+// Connect to database so we can push the data
+// const db = mongoose.connection;
+// mongoose.connect('mongodb://localhost/Mandela_Diaries/data');
 
 // Get all reviews (cRud)
 exports.getAll = (req, res) => {

@@ -5,5 +5,17 @@ body {
 }
 
 a {
-  color:#00B7FF
+  color:#00B7FF;
+}
+
+.slider-handle.custom {
+	line-height: 20px;
+	font-size: 20px;
+	content: '\2605'; /*unicode star character*/
+	color: #726204;
+}
+
+label {
+  width: 80px;
+  text-align: right;
 }

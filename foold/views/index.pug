@@ -1,6 +1,12 @@
 extends layout
 
 block content
+  nav
+    | Simple login button insprired by Giantbomb
+    .wrap
+      a(href='https://auth.giantbomb.com/login', target='_blank')
+      input.login(type='submit', value='Log In')
+    
   h1= title
   //- on change is a html listener
   select(onchange="location = this.value;")

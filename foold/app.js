@@ -3,19 +3,31 @@ import cookieParser from 'cookie-parser';
 import Debug from 'debug';
 import express from 'express';
 import logger from 'morgan';
+import dotenv from 'dotenv';
+// For validating user account
+import expressValidator from 'express-validator';
+import passport from 'passport';
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt-node';
+import crypto from 'crypto';
+import session from 'express-session';
 // import favicon from 'serve-favicon';
 import path from 'path';
 import lessMiddleware from 'less-middleware';
+import flash from 'express-flash';
 import index from './routes/index';
 
+// specify .env file
+dotenv.load({ path: '.env' });
 
+// Storing user sessions
+const MongoStore = require('connect-mongo')(session);
 const app = express();
-const debug = Debug('foold:app');
+//const debug = Debug('foold:app');
 const restaurant = require('./routes/restaurants');
 
 
-mongoose.connect('mongodb://localhost/restaurants');
+mongoose.connect(process.env.MONGODB_URI);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,11 +35,27 @@ app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
+// Store session
+app.use(expressValidator());
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: 'WDI Singapore',
+  store: new MongoStore({
+    url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
+    autoReconnect: true,
+    clear_interval: 3600
+  })
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
@@ -57,7 +85,8 @@ app.use((err, req, res, next) => {
 
 // Handle uncaughtException
 process.on('uncaughtException', (err) => {
-  debug('Caught exception: %j', err);
+  console.log(err);
+  //debug('Caught exception: %j', err);
   process.exit(1);
 });
 
