@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 
 const reviewSchema = new mongoose.Schema({
-  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  review_name: String,
   restaurant_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant' },
   amount_spent: Number,
   party_size: Number,
-  rating: [],
+  rating: Number,
   comments: String
 });
 

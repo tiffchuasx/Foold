@@ -7,6 +7,8 @@ const indexController = require('../controllers/index_controller');
 
 router.get('/', indexController.getList);
 
+router.post('/', userController.getSignup);
+
 // router.get('/login', (req, res, next) => {
 //   // return data (json)
 //   res.json('Login');

@@ -11,8 +11,6 @@ router.get('/', restaurantController.getAll);
 // Get restaurant according to ID
 router.get('/:id', restaurantController.getOne);
 
-
-
 // Update restaurant
 
 // Delete restaurant

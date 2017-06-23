@@ -1,6 +1,43 @@
 extends layout
 
 block content
+  #editform.modal(tabindex='-1', role='dialog')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4.modal-title Leave a Review!
+        .modal-body
+          form.form-inline(method="POST" action="/review/" +restaurant.id)
+            .form-group
+              label#change(for='review_name') Reviewer:
+              input#review_name.form-control(type='text', placeholder='Your Name' name="review_name")
+              input#restaurantID(type='hidden', name='restaurant_id', value=restaurant.id)
+            .form-group
+              label#change(for='exampleInputName2') I spent
+              label.sr-only(for='amount_spent') Amount
+              .input-group
+                .input-group-addon $
+                input#amount_spent.form-control(type='text', placeholder='Amount' name="amount_spent")
+              label(for='exampleInputName2') on
+              label.sr-only(for='party_size') Parties
+              .input-group
+                input#party_size.form-control(type='text', placeholder='Number of' name="party_size")
+                .input-group-addon pax
+              .food-value
+                label#change(for='value') Value:
+                label.sr-only(for='value') Value
+                input#rating.form-control(type='text' name="value")
+                .input-group
+                  .input-group-addon /10
+              .form-group
+                label#change Comments:
+                textarea.form-control(rows='3' name="comments")
+                .modal-footer
+                  button.btn.btn-default(type='button', data-dismiss='modal') Close
+                  button#submitReviewBut.btn.btn-primary.submit(type='Submit') Save changes}}
+            
   .container
       // Restaurant details
       .row
@@ -11,3 +48,8 @@ block content
           h6#restaurantaddress1 !{restaurant.address_line1}
           h6#restaurantaddress2 !{restaurant.address_line2}
           h6#restaurantcontact !{restaurant.contact}
+          
+          button#review-button.btn.btn-info.btn-lg(type='button', data-toggle='modal') Leave a Review!
+          
+  
+  

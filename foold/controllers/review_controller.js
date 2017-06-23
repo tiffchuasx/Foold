@@ -14,21 +14,18 @@ exports.getAll = (req, res) => {
 
 // Create review (Crud)
 exports.createReview = (req, res, next) => {
-  let ratingArray = [];
-  ratingArray.push(req.body.ratingValue);
-  ratingArray.push(req.body.ratingService);
-  ratingArray.push(req.body.ratingAmbience);
   Review.create({
-    user_id: req.body.user_id,
-    restaurant_id: req.body.restaurant_id,
+    review_name: req.body.review_name,
+    restaurant_id: req.param.id,
     amount_spent: req.body.amount_spent,
     party_size: req.body.party_size,
-    rating: ratingArray,
+    rating: req.body.rating,
     comments: req.body.comments
   },
   (err, output) => {
     if (err) console.log(err);
-    res.redirect('/');
+    console.log('submitted review successfully')
+    res.redirect('/')
   });
 };
 

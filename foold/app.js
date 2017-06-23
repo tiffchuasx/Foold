@@ -16,6 +16,7 @@ import path from 'path';
 import lessMiddleware from 'less-middleware';
 import flash from 'express-flash';
 import index from './routes/index';
+import review from './routes/reviews';
 
 // specify .env file
 dotenv.load({ path: '.env' });
@@ -23,7 +24,7 @@ dotenv.load({ path: '.env' });
 // Storing user sessions
 const MongoStore = require('connect-mongo')(session);
 const app = express();
-//const debug = Debug('foold:app');
+//  const debug = Debug('foold:app');
 const restaurant = require('./routes/restaurants');
 
 
@@ -38,7 +39,7 @@ app.set('view engine', 'pug');
 //app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: false
+  extended: true
 }));
 
 // Store session
@@ -63,6 +64,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Creating a new route for the application
 app.use('/', index);
+app.use('/review', review);
 app.use('/restaurants', restaurant);
 
 // catch 404 and forward to error handler
